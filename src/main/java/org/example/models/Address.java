@@ -1,7 +1,5 @@
 package org.example.models;
 
-import org.example.Exceptions.invalidCountryException;
-
 public class Address {
     private String address1;
     private String address2;
@@ -14,10 +12,7 @@ public class Address {
         this.address2=address2;
         this.zipCode=zipCode;
         this.city=city;
-        if (country.equalsIgnoreCase("georgia")) {
-            throw new invalidCountryException();
-        }else {
-        this.country=country;}
+        this.country=country;
     }
 
     public String getAddress1() {
@@ -50,7 +45,8 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
-    public String toStringAddress(){
+    @Override
+    public String toString(){
         return (address1+", "+address2+", "+zipCode+", "+city+", "+country);
     }
 
