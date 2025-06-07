@@ -1,85 +1,72 @@
 package org.example;
 
+import org.example.Exceptions.AgeException;
 import org.example.Exceptions.InvalidCountryException;
-import org.example.models.Address;
-import org.example.models.Customer;
-import org.example.models.ExpressOrder;
-import org.example.models.Order;
+import org.example.models.*;
 
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
-        Customer customer=new Customer();
-
-        //        Customer customer = new Customer("John",
-//                "Smith",
-//                "john@gmail.com",
-//                "+37477777777",
-//                "5 Azatutyun, Yerevan, Armenia");
-//        try {
-//        customer.setAge(-11);
-//     //   System.out.println(customer.getAge()); this is not reachable , if we get exception it
-//            //will go straight to catch
-//        } catch (ageException a) {
-//            System.out.println(a.toString());
-//            System.out.println("Reset to 20");
-//            customer.setAge(20);
-//        }finally {
-//            System.out.println("Finally always runs, and age is" + customer.getAge());
-//        }
-
-//        try {
-//            customer.setFirstName("a");
-//        }catch (InvalidNameException N){
-//            System.out.println("setting default name to John");
-//            customer.setFirstName("John");
-//        }
-
-
-//        Customer customer2 = new Customer("John",
-//                "Smith",
-//                "john@gmail.com",
-//                "+37477777777",
-//                new Address("Azatutyan","27/14","0024","Yerevan","Armenia"));
-//        Order order2 = new ExpressOrder(customer2, 230);
-//        order2.getCustomer().printSummary();
-//        order2.printSummery();
-
-        try{
-            Customer customer3 = new Customer("John",
-                    "Smith",
-                    "john@gmail.com",
-                    "+37477777777",
-                    new Address("Azatutyan","27/14",
-                            "0024","Yerevan","Georgia")); }
-        catch (InvalidCountryException C){
-            System.out.println("Cant create a customer with Georgia as a country");
+        /////
+        Customer customer1 = new Customer("John",
+                "Smith",
+                "john@gmail.com",
+                "+37477777777", new Address("1", "fuchik", "008",
+                "Yerevan", "Armenia"));
+        try {
+            customer1.setAge(-11);
+            //  System.out.println(customer.getAge()); this is not reachable , if we get exception it
+            //will go straight to catch
+        } catch (AgeException a) {
+            System.out.println(a.toString());
+            System.out.println("Reset to 20");
+            customer1.setAge(20);
+        } finally {
+            System.out.println("Finally always runs, and age is" + customer1.getAge());
         }
 
-        //  Order order3 = new ExpressOrder(customer3, 230); why its red ???? coz of try/catch?
-        //    order3.getCustomer().printSummary();
-        //    order3.printSummery();
+        ////////////
+        Customer customer2 = new Customer("John",
+                "Smith",
+                "john@gmail.com",
+                "+37477777777",
+                new Address("Azatutyan", "27/14", "0024", "Abovyan", "Armenia"));
 
+        ///////
+        Customer customer3 = new Customer("John",
+                "Smith",
+                "john@gmail.com",
+                "+37477777777",
+                new Address("Azatutyan", "27/14",
+                        "0024", "Tbilisi", "Georgia"));
+        ///////////
+        Order order1 = new Order(customer1, 230);
+        System.out.println(order1.toString());
+        order1.printSummary();
 
-        Order order = new ExpressOrder(customer, 1500);
-        Order order2 = new ExpressOrder(customer, 300);
-        Order order3 = new ExpressOrder(customer, 400);
+        Order order2 = new ExpressOrder(customer2, 1530);
+        System.out.println(order2.toString());
+        order2.printSummary(); // TODO ??? how to make it the price of Express???
 
-        order.getCustomer().printSummary();
-        order.printSummary();
+        Order order3 = new InternationalOrder(customer3, 2000);
+        System.out.println(order3.toString());
+        order3.printSummary(); // TODO ??? how to make it the price of International???
+       try {
+           order3.shipmentCountryCheck();
+       }catch (InvalidCountryException E){
+           System.out.println("Please change the destination");
+       }
 
-
-        ArrayList<Order> orders= new ArrayList<>();
-        orders.add(order);
+        //////
+        ArrayList<Order> orders = new ArrayList<>();
+        orders.add(order1);
         orders.add(order2);
         orders.add(order3);
-
         System.out.println("list of orders");
         System.out.println(orders);
 
 
     }
-
 }
