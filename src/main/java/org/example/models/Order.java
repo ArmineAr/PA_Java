@@ -24,8 +24,11 @@ public class Order implements Comparable<Order>{
     public double getPrice() {
         return price;
     }
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double price) throws InvalidCountryException {
+        if (price<0) {
+            throw new InvalidCountryException();
+        }else {
+        this.price = price;}
     }
     public Customer getCustomer() {
         return customer;
@@ -58,7 +61,7 @@ public class Order implements Comparable<Order>{
         //TODO ?? whats the difference of toString and printSummary
     }
     @Override
-    public int compareTo(Order o) {
+    public int compareTo(Order o) { // TODO ??? dont understand
         if(this.price<o.price){
             return -1;
         } else if (this.price>o.price) {

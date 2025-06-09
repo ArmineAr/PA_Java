@@ -1,7 +1,7 @@
 package org.example.Exceptions;
 
 public class AgeException extends RuntimeException{
-    private  String message;
+    private String message;
     public AgeException(String message){
         this.message=message;
     }

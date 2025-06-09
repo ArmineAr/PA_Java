@@ -1,7 +1,8 @@
 package org.example.models;
 
-import org.example.Exceptions.InvalidNameException;
+
 import org.example.Exceptions.AgeException;
+import org.example.Exceptions.InvalidNameException;
 
 public class Customer {
     private String firstName;
